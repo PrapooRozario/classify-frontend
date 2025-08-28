@@ -8,10 +8,12 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="layout mx-auto my-6">
-      <aside>
-        <Sidebar />
-      </aside>
-      <main>{children}</main>
+      <div className="flex gap-20">
+        <aside>
+          <Sidebar />
+        </aside>
+        <main>{children}</main>
+      </div>
       <footer>
         <Footer />
       </footer>
