@@ -125,7 +125,7 @@
 .layout {
   width: 100%;
   max-width: 100%; /* default mobile full width */
-  margin: 18px auto;  /* horizontally center */
+  margin: 24px auto;  /* horizontally center */
   padding: 0 1rem; /* optional padding on small screens */
 
   /* Extra small devices (sm: ≥ 640px) */
@@ -153,3 +153,5 @@
     max-width: 1536px; /* 96rem */
   }
 }
+
+

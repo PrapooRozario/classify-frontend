@@ -1,6 +1,12 @@
-import { Home, Calendar, CreditCard, BookOpen, Zap, type LucideIcon } from "lucide-react";
+import { Home, Calendar, CreditCard, BookOpen, Zap, type LucideIcon, User, ChartNoAxesColumn } from "lucide-react";
 
 export type RouteType = {
+  route: string;
+  name: string;
+  icon: LucideIcon;
+};
+
+export type RouteType2 = {
   route: string;
   name: string;
   icon: LucideIcon;
@@ -14,4 +20,14 @@ const routesData: RouteType[] = [
   { route: "/exam", name: "Take an Exam", icon: Zap },
 ];
 
-export default routesData;
+const routesData2: RouteType2[] = 
+[{ route: "/profile", name: "Go to Profile", icon: User }, 
+    
+    
+    { route: "/leaderboard", name: "Go to Leaderboard", icon: ChartNoAxesColumn }
+
+];
+export {routesData, routesData2};
+
+
+
