@@ -1,20 +1,23 @@
-import type { ReactNode } from "react";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 
-type LayoutProps = {
-  children: ReactNode;
-};
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="layout mx-auto">
-      <div className="flex">
-        <aside className="flex-1">
+    <div className="layout min-h-screen flex flex-col ">
+      <div className="flex md:gap-20 gap-10">
+        {/* Sidebar */}
+        <aside>
           <Sidebar />
         </aside>
-        <main className="flex-1">{children}</main>
+
+        {/* Main Content */}
+        <main className=" w-full min-w-0 overflow-x-hidden">
+          <div className="h-full w-full">{children}</div>
+        </main>
       </div>
-      <footer>
+
+      {/* Footer  */}
+      <footer className="mt-auto w-full">
         <Footer />
       </footer>
     </div>

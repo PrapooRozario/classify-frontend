@@ -125,9 +125,8 @@
 .layout {
   width: 100%;
   max-width: 100%; /* default mobile full width */
-  margin: 24px auto;  /* horizontally center */
-  padding: 0 1rem; /* optional padding on small screens */
-
+  padding: 2rem;
+  margin: 0px auto;
   /* Extra small devices (sm: ≥ 640px) */
   @media (min-width: 640px) {
     max-width: 640px; /* 40rem */
