@@ -10,6 +10,7 @@ type CardProps = {
   BadgeSize?: "sm" | "md" | "lg";
   BadgeClassName?: string;
   BadgeValue?: number;
+  HeaderText?: string;
   Prefix?: string;
   Suffix?: string;
 };
@@ -18,6 +19,7 @@ const Card: React.FC<CardProps> = ({
   children,
   className = "",
   HeaderIcon: HeaderIconComp,
+  HeaderText = "Card Title",
   BadgeIcon,
   BadgeSize,
   BadgeClassName,
@@ -37,8 +39,8 @@ const Card: React.FC<CardProps> = ({
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <p className="font-medium text-neutral-400 flex items-center gap-2 text-sm">
-          {HeaderIconComp && <HeaderIconComp className="w-4 h-4" />}
-          Leaderboard
+            {HeaderIconComp && <HeaderIconComp className="w-4 h-4" />}
+          {HeaderText}
         </p>
         <Badge
           prefix={Prefix}

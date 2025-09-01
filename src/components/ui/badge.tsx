@@ -1,6 +1,6 @@
 import React from "react";
 import { type LucideIcon } from "lucide-react";
-
+import { cn } from "../../lib/utils";
 interface BadgeProps {
   value: string | number;
   icon?: LucideIcon;
@@ -13,7 +13,7 @@ interface BadgeProps {
 
 const Badge: React.FC<BadgeProps> = ({
   value,
-  icon,
+  icon: Icon,
   size = "md",
   onClick,
   className = "",
@@ -35,17 +35,20 @@ const Badge: React.FC<BadgeProps> = ({
 
   return (
     <div
-      className={`
-        flex items-center border font-semibold 
+      className={cn(
+        `
+        flex items-center gap-2 border font-semibold 
         hover:bg-neutral-800 transition duration-200 
         cursor-pointer border-neutral-800 rounded-xl w-fit
         text-neutral-400
-        ${sizeClasses[size]}
-        ${className}
-      `}
+        `,
+        sizeClasses[size],
+        className
+      )}
       onClick={onClick}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : undefined}
+      aria-label={`${prefix ?? ""}${value}${suffix ?? ""}`}
       onKeyDown={
         onClick
           ? (e) => {
@@ -57,12 +60,14 @@ const Badge: React.FC<BadgeProps> = ({
           : undefined
       }
     >
-      <p className="leading-none">{prefix}{value}{suffix}</p>
-      {icon &&
-        React.createElement(icon, {
-          size: iconSizes[size],
-          className: "text-white",
-        })}
+      <p>
+        {prefix}
+        {value}
+        {suffix}
+      </p>
+      <span>
+        {Icon && <Icon size={iconSizes[size]} className="text-white" />}
+      </span>
     </div>
   );
 };
