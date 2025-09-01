@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 import Badge from "./badge";
 import type { LucideIcon } from "lucide-react";
 import Bg from "./bg";
@@ -12,6 +12,7 @@ type CardProps = {
   BadgeSize?: "sm" | "md" | "lg";
   BadgeClassName?: string;
   BadgeValue?: number;
+  Element?: JSX.Element;
   HeaderText?: string;
   Prefix?: string;
   Suffix?: string;
@@ -25,6 +26,7 @@ const Card: React.FC<CardProps> = ({
   BadgeIcon,
   BadgeSize,
   BadgeClassName,
+  Element,
   BadgeValue = 1,
   Prefix = "",
   Suffix = "",
@@ -54,6 +56,7 @@ const Card: React.FC<CardProps> = ({
             />
           </div>
         )}
+        {Element ? Element : ""}
       </div>
 
       {children}
