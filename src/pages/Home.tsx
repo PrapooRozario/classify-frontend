@@ -1,6 +1,3 @@
-import One from "/assets/icons/one.png";
-import Two from "/assets/icons/two.png";
-import Three from "/assets/icons/three.png";
 import Hi from "/assets/icons/hi.png";
 import {
   ChartNoAxesColumn,
@@ -18,6 +15,8 @@ import { Separator } from "../components/ui/separator";
 import { Marquee } from "../components/magicui/marquee";
 import { BudgetChart } from "../components/budgetChart";
 import ActiveClassesChart from "../components/activeClassesChart";
+import ClassCard from "../components/ui/classCard";
+import { Button } from "../components/ui/button";
 
 const Home = () => {
   // Active Tasks status data
@@ -27,17 +26,51 @@ const Home = () => {
     { id: 3, status: "Completed", value: 1 },
   ];
 
+  // Fake data (5 items)
+  const classes = [
+    {
+      subjectName: "Math",
+      classTime: "07:00AM - 08:30AM",
+      instructorName: "Abdul Kalam",
+      instructorImage:
+        "https://as2.ftcdn.net/jpg/03/67/70/91/1000_F_367709147_W4Q2pRjMcz7jUkuH4e1BIhmtCDceu3FH.webp",
+    },
+    {
+      subjectName: "Physics",
+      classTime: "09:00AM - 10:30AM",
+      instructorName: "Marie Curie",
+      instructorImage:
+        "https://as2.ftcdn.net/jpg/03/67/70/91/1000_F_367709147_W4Q2pRjMcz7jUkuH4e1BIhmtCDceu3FH.webp",
+    },
+    {
+      subjectName: "Chemistry",
+      classTime: "11:00AM - 12:30PM",
+      instructorName: "Albert Einstein",
+      instructorImage:
+        "https://as2.ftcdn.net/jpg/03/67/70/91/1000_F_367709147_W4Q2pRjMcz7jUkuH4e1BIhmtCDceu3FH.webp",
+    },
+  ];
+  const subjectColors = {
+    Math: "bg-gradient-to-r from-neutral-800/10 to-yellow-950/5",
+    Physics: "bg-gradient-to-r from-neutral-800/10 to-blue-950/5",
+    Chemistry: "bg-gradient-to-r from-neutral-800/10 to-pink-900/5 ",
+    Default: "bg-gradient-to-r from-neutral-800/10 to-neutral-900/5",
+  };
+
   return (
     <div>
       {/* Header Section */}
       <div className="mb-6">
         <Text
           as="h1"
-          className="text-white font-normal mb-4 flex items-center gap-2"
+          className="text-white font-normal mb-4 flex  gap-2 "
           variant="h1"
         >
-          <span className="font-semibold">Hello, </span> Prapoo Rozario{" "}
-          <img src={Hi} alt="Hi Emoji" className="w-12 h-12" />
+          <span className="font-semibold">Hello,</span>
+          <span className="flex items-center gap-1">
+            Prapoo Rozario
+            <img src={Hi} alt="Hi Emoji" className="md:w-12 md:h-12 w-8 h-8" />
+          </span>
         </Text>
 
         {/* Marquee/Scrolling Message */}
@@ -66,9 +99,14 @@ const Home = () => {
           HeaderText="Leaderboard"
         >
           <div className="space-y-3 mt-4 sm:mt-6">
-            <RankProfile name="Prapoo Rozario" points={550} rank={One} target />
-            <RankProfile name="Shayan Sardar" points={227} rank={Two} />
-            <RankProfile name="Fahad Ahmed" points={43} rank={Three} />
+            <RankProfile
+              name="Prapoo Rozario"
+              points={550}
+              rank={1}
+              target={true}
+            />
+            <RankProfile name="Shayan Sardar" points={227} rank={2} />
+            <RankProfile name="Fahad Ahmed" points={43} rank={3} />
           </div>
         </Card>
 
@@ -163,23 +201,55 @@ const Home = () => {
       </div>
 
       {/* Budget and Classes Section */}
-      <div className="grid grid-cols-3 gap-6 mt-6">
-        {/* Budget Chart - Spans two columns */}
-        <div className="col-span-2">
-          <BudgetChart />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 ">
+        <div className="flex flex-col gap-6 md:col-span-2 ">
+          <div>
+            <BudgetChart />
+          </div>
+
+          <div>
+            <BudgetChart />
+          </div>
         </div>
 
-        {/* Today's Classes Card */}
-        <div>
-          <Card
-            HeaderText="Today's Classes"
-            BadgeValue={12}
-            Suffix=" Active"
-            HeaderIcon={School}
-          >
-            .
-          </Card>
-        </div>
+        {/* Today's Classes Card  */}
+        <Card
+          HeaderText="Today's Classes"
+          BadgeValue={12}
+          Suffix=" Active"
+          HeaderIcon={School}
+          className="space-y-4 max-h-full w-full"
+        >
+          <div className="space-y-4">
+            {classes.map((classItem, index) => (
+              <ClassCard
+                instructorName={classItem?.instructorName}
+                subjectName={classItem?.subjectName}
+                key={index}
+                subjectTime={classItem.classTime}
+                instructorImage={classItem.instructorImage}
+                subjectColor={subjectColors[classItem.subjectName]}
+                className="w-full flex-shrink-0"
+              />
+            ))}
+          </div>
+
+          <div className="mt-auto space-y-2">
+            <Button
+              variant="default"
+              className="w-full py-4 sm:py-5 md:py-6 text-sm sm:text-base"
+            >
+              All Classes
+            </Button>
+            <Text
+              variant="small"
+              className="text-neutral-400 text-xs 
+             text-center"
+            >
+              Complete all your classes and unlock your points!
+            </Text>
+          </div>
+        </Card>
       </div>
     </div>
   );

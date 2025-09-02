@@ -18,7 +18,6 @@ import {
 import React from "react";
 import { WalletCards } from "lucide-react";
 
-
 const chartData = [
   { date: "2024-04-01", income: 222, expense: 150 },
   { date: "2024-04-02", income: 97, expense: 180 },
@@ -107,7 +106,7 @@ const chartData = [
   { date: "2024-06-24", income: 132, expense: 180 },
   { date: "2024-06-25", income: 141, expense: 190 },
   { date: "2024-06-26", income: 434, expense: 380 },
-]
+];
 const chartConfig = {
   income: {
     label: "Income",
@@ -215,7 +214,7 @@ export function BudgetChart() {
             tickLine={false}
             axisLine={false}
             tickMargin={5}
-            minTickGap={32}
+            minTickGap={35}
             tickFormatter={(value) =>
               new Date(value).toLocaleDateString("en-US", {
                 month: "short",

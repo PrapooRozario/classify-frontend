@@ -168,3 +168,20 @@
     max-width: 1536px; /* 96rem */
   }
 }
+
+@layer utilities {
+  /* Chrome, Safari, Edge, and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Firefox */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  /* IE and Edge (legacy) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+  }
+}

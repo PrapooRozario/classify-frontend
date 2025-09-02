@@ -94,7 +94,7 @@ const Sidebar = () => {
                   to={route.route}
                   className="flex items-center justify-center w-full h-full"
                 >
-                  <route.icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 text-white" />
+                  <route.icon className="w-4 h-4 text-white" />
                 </Link>
               </TooltipTrigger>
               <TooltipContent
