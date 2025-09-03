@@ -63,7 +63,7 @@ const Home = () => {
       <div className="mb-6">
         <Text
           as="h1"
-          className="text-white font-normal mb-4 flex  gap-2 "
+          className="text-white font-normal items-center mb-4 flex  gap-2 "
           variant="h1"
         >
           <span className="font-semibold">Hello,</span>
@@ -255,7 +255,7 @@ const Home = () => {
         <Bg variant="2" className="py-3 px-6 w-fit mx-auto">
           <Text
             variant="p"
-            className="uppercase flex flex-col md:flex-row gap-2 items-center justify-center text-sm md:text-base text-center"
+            className="uppercase text-white flex flex-col md:flex-row gap-2 items-center justify-center text-xs md:text-base text-center"
           >
             Is your exam knocking at the door? No worries!
             <Button className="uppercase cursor-pointer">Take Exam</Button>
