@@ -33,7 +33,7 @@ const Sidebar = () => {
           scale: isOpen ? 1 : 0.95,
         }}
         transition={{ duration: 0.2 }}
-        className={isOpen ? "block" : "hidden lg:block"}
+        className={isOpen ? "visible" : "invisible lg:block"}
       >
         {/* Main Sidebar */}
         <div className="bg-neutral-900/50 border-neutral-800/50 border rounded-xl p-1.5 sm:p-2 lg:p-2 gap-1.5 sm:gap-2">
@@ -79,7 +79,9 @@ const Sidebar = () => {
           scale: isOpen ? 1 : 0.95,
         }}
         transition={{ duration: 0.2 }}
-        className="grid md:grid-cols-2  gap-2"
+        className={`grid md:grid-cols-2  gap-2 ${
+          isOpen ? "visible" : "invisible"
+        }`}
       >
         {routesData2.map((route, index) => (
           <div

@@ -17,7 +17,7 @@ import { BudgetChart } from "../components/budgetChart";
 import ActiveClassesChart from "../components/activeClassesChart";
 import ClassCard from "../components/ui/classCard";
 import { Button } from "../components/ui/button";
-
+import { PointChart } from "../components/pointChart";
 const Home = () => {
   // Active Tasks status data
   const tasksStatus = [
@@ -74,7 +74,7 @@ const Home = () => {
         </Text>
 
         {/* Marquee/Scrolling Message */}
-        <Bg variant="2" className="px-4 py-0.5 relative overflow-hidden">
+        <Bg variant="2" className=" relative overflow-hidden">
           <Marquee>
             <Text variant="small" as="p" className="uppercase">
               Here's everything you need to stay focused, creative, and ahead of
@@ -208,7 +208,7 @@ const Home = () => {
           </div>
 
           <div>
-            <BudgetChart />
+            <PointChart />
           </div>
         </div>
 
@@ -237,7 +237,7 @@ const Home = () => {
           <div className="mt-auto space-y-2">
             <Button
               variant="default"
-              className="w-full py-4 sm:py-5 md:py-6 text-sm sm:text-base"
+              className="w-full py-4 cursor-pointer sm:py-5 md:py-6 text-sm sm:text-base"
             >
               All Classes
             </Button>
@@ -246,10 +246,22 @@ const Home = () => {
               className="text-neutral-400 text-xs 
              text-center"
             >
-              Complete all your classes and unlock your points!
+              Complete all your classes and unlock your points.
             </Text>
           </div>
         </Card>
+      </div>
+      <div className="mt-6">
+        <Bg variant="2" className="py-3 px-6 w-fit mx-auto">
+          <Text
+            variant="p"
+            className="uppercase flex flex-col md:flex-row gap-2 items-center justify-center text-sm md:text-base text-center"
+          >
+            Is your exam knocking at the door? No worries!
+            <Button className="uppercase cursor-pointer">Take Exam</Button>
+            and boost your confidence!
+          </Text>
+        </Bg>
       </div>
     </div>
   );

@@ -119,7 +119,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function BudgetChart() {
-  const [timeRange, setTimeRange] = React.useState("90d");
+  const [timeRange, setTimeRange] = React.useState("all_time");
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
@@ -129,6 +129,8 @@ export function BudgetChart() {
       daysToSubtract = 30;
     } else if (timeRange === "7d") {
       daysToSubtract = 7;
+    } else if (timeRange === "all_time") {
+      return chartData;
     }
     const startDate = new Date(referenceDate);
     startDate.setDate(startDate.getDate() - daysToSubtract);
@@ -146,9 +148,12 @@ export function BudgetChart() {
             className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex border-neutral-800 bg-neutral-900"
             aria-label="Select a value"
           >
-            <SelectValue placeholder="Last 3 months" />
+            <SelectValue placeholder="All Time" />
           </SelectTrigger>
           <SelectContent className="rounded-xl bg-neutral-900 border-neutral-800 text-white">
+            <SelectItem value="all_time" className="rounded-lg">
+             All Time
+            </SelectItem>
             <SelectItem value="90d" className="rounded-lg">
               Last 3 months
             </SelectItem>
