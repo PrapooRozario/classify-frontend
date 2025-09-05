@@ -1,3 +1,4 @@
+import Contact from "../components/contact";
 import Features from "../components/features";
 import Hero from "../components/hero";
 import LightRays from "../components/LightRays";
@@ -19,6 +20,7 @@ const LandingPage = () => {
       />
       <Hero />
       <Features />
+      <Contact/>
     </div>
   );
 };

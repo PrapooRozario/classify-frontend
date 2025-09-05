@@ -5,6 +5,6 @@ type RouteType = {
 export const routesData:RouteType[] = [
     { route: "/", name: "Home" },
     { route: "/dashboard", name: "Dashboard" },
-    { route: "/features", name: "Features" },
-    { route: "/contact", name: "Contact" },
+    { route: "/#features", name: "Features" },
+    { route: "/#contact", name: "Contact" },
 ]

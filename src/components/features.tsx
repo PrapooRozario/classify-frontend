@@ -9,7 +9,7 @@ import { featuresData } from "../data/featuresData";
 
 const Features = () => {
   return (
-    <div>
+    <div id="features">
       <Text
         variant="h1"
         className="!text-4xl text-center border-b border-dashed border-neutral-800 bg-gradient-to-b from-transparent to-neutral-900 font-light w-fit mx-auto sm:!text-5xl md:!text-6xl lg:!text-7xl leading-snug lg:leading-tight"

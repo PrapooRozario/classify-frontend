@@ -63,12 +63,12 @@ const DashboardHome = () => {
       <div className="mb-6">
         <Text
           as="h1"
-          className="text-white font-normal items-center mb-4 flex  gap-2 "
+          className="text-white font-normal items-center mb-4 md:flex gap-2 "
           variant="h1"
         >
           <span className="font-semibold">Hello,</span>
           <span className="flex items-center gap-1">
-            Prapoo Rozario
+            <h1 className="text-nowrap">Prapoo Rozario</h1>
             <img src={Hi} alt="Hi Emoji" className="md:w-12 md:h-12 w-8 h-8" />
           </span>
         </Text>
