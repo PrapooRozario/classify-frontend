@@ -1,9 +1,9 @@
 
-type TextVariant = "h1" | "h2" | "h3" | "p" | "small";
+type TextVariant = "h1" | "h2" | "h3" | "p" | "small" | "error";
 
 type TextProps = {
   children: React.ReactNode;
-  variant?: TextVariant;
+variant?: TextVariant;
   className?: string;
   as?: React.ElementType; 
 };
@@ -15,9 +15,10 @@ const Text: React.FC<TextProps> = ({ children, variant = "p", className = "", as
     h3: "text-2xl font-medium",
     p: "text-neutral-300 text-sm sm:text-base md:text-lg",
     small: "text-sm font-light text-neutral-400",
+    error: "text-red-500 text-xs"
   }[variant];
 
-  const Component = as || variant; 
+  const Component = as || "p"; 
 
   return <Component className={`${variantClass} ${className}`}>{children}</Component>;
 };
