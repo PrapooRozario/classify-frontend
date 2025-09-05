@@ -18,7 +18,7 @@ import ActiveClassesChart from "../components/activeClassesChart";
 import ClassCard from "../components/ui/classCard";
 import { Button } from "../components/ui/button";
 import { PointChart } from "../components/pointChart";
-const Home = () => {
+const DashboardHome = () => {
   // Active Tasks status data
   const tasksStatus = [
     { id: 1, status: "Pending", value: 8 },
@@ -267,4 +267,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default DashboardHome;

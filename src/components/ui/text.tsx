@@ -10,7 +10,7 @@ type TextProps = {
 
 const Text: React.FC<TextProps> = ({ children, variant = "p", className = "", as }) => {
   const variantClass = {
-    h1: "font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl",
+    h1: "font-bold sm:text-2xl md:text-3xl lg:text-4xl text-xl",
     h2: "text-3xl font-semibold",
     h3: "text-2xl font-medium",
     p: "text-neutral-300 text-sm sm:text-base md:text-lg",

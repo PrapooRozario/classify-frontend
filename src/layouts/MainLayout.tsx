@@ -1,27 +1,26 @@
+import { Outlet } from "react-router";
 import Footer from "../components/footer";
-import Sidebar from "../components/sidebar";
+import Header from "../components/header";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const MainLayout = () => {
   return (
-    <div className="layout min-h-screen flex flex-col ">
-      <div className="flex md:gap-20 gap-10">
-        {/* Sidebar */}
-        <aside>
-          <Sidebar />
-        </aside>
+    <div className="flex flex-col min-h-screen layout">
+      {/* Header */}
+      <header className="w-full">
+        <Header />
+      </header>
 
-        {/* Main Content */}
-        <main className=" w-full min-w-0 overflow-x-hidden">
-          <div className="h-full w-full">{children}</div>
-        </main>
-      </div>
+      {/* Main Content */}
+      <main className="flex-grow my-16">
+        <Outlet />
+      </main>
 
-      {/* Footer  */}
-      <footer className="mt-auto w-full">
+      {/* Footer */}
+      <footer className="w-full mt-auto">
         <Footer />
       </footer>
     </div>
   );
 };
 
-export default Layout;
+export default MainLayout;
