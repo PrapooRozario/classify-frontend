@@ -1,3 +1,4 @@
+import Features from "../components/features";
 import Hero from "../components/hero";
 import LightRays from "../components/LightRays";
 
@@ -17,7 +18,7 @@ const LandingPage = () => {
         className="custom-rays !absolute top-0 !-z-10 left-0 w-full h-full"
       />
       <Hero />
-  
+      <Features />
     </div>
   );
 };

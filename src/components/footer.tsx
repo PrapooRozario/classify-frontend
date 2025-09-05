@@ -1,10 +1,10 @@
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import { FaGithub, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Bg from "./ui/bg";
 import Text from "./ui/text";
 import Classify from "/classify.svg";
-import { routes } from "../data/footerData";
+import { routesData } from "../data/footerRouteData";
 
 const Footer = () => {
   return (
@@ -20,14 +20,14 @@ const Footer = () => {
 
         {/* Navigation Links */}
         <div className="flex gap-6 flex-wrap justify-center">
-          {routes.map((route, index) => (
-            <Link
+          {routesData.map((route, index) => (
+            <NavLink
               to={route.route}
               key={index}
               className="text-neutral-400 hover:text-white uppercase transition duration-200 text-sm"
             >
               {route.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
 

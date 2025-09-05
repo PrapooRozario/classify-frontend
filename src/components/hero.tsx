@@ -31,7 +31,7 @@ const Hero = () => {
       </div>
 
       {/* Spinning Text */}
-      <div className="relative flex justify-center items-center md:my-32 my-28">
+      <div className="relative flex justify-center items-center md:mt-32 mt-28 md:mb-40 mb-32">
         <SpinningText
           reverse
           className="text-sm sm:text-base md:text-lg lg:text-xl font-light tracking-wide"

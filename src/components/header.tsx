@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { BorderBeam } from "./magicui/border-beam";
 import { Button } from "./ui/button";
 import Classify from "/classify.svg";
@@ -16,6 +17,7 @@ const Header = () => {
             size={60}
           />
           Sign In
+          <ArrowUpRight size={20} />
         </Button>
         <Button className="relative cursor-pointer uppercase font-light overflow-hidden">
           <BorderBeam
@@ -25,6 +27,7 @@ const Header = () => {
             size={60}
           />
           Sign Up
+          <ArrowUpRight size={20} />
         </Button>
       </div>
     </div>

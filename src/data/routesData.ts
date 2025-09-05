@@ -1,12 +1,12 @@
 import { Home, Calendar, CreditCard, BookOpen, Zap, type LucideIcon, User, ChartNoAxesColumn } from "lucide-react";
 
-export type RouteType = {
+ type RouteType = {
   route: string;
   name: string;
   icon: LucideIcon;
 };
 
-export type RouteType2 = {
+ type RouteType2 = {
   route: string;
   name: string;
   icon: LucideIcon;
