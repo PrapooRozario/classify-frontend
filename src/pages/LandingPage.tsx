@@ -20,7 +20,7 @@ const LandingPage = () => {
       />
       <Hero />
       <Features />
-      <Contact/>
+      <Contact />
     </div>
   );
 };
