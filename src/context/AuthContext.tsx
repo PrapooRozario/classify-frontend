@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { type Session } from "@supabase/supabase-js";
+import type { File } from "buffer";
 
 export const AuthContext = createContext(null);
 
@@ -36,6 +37,47 @@ export const AuthContextProvider = ({
     return { success: true, data };
   };
 
+  // Update User
+  const updateUserProfile = async (fullname: string, picture: File) => {
+    try {
+      if (!picture) {
+        throw new Error("No picture provided");
+      }
+
+      // Unique file path
+      const filePath = `avatars/${Date.now()}_${picture.name}`;
+
+      // Upload file to Supabase storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(filePath, picture);
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { publicUrl, error: urlError } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(filePath);
+
+      if (urlError) throw urlError;
+
+      // Update user profile
+      const { data, error } = await supabase.auth.updateUser({
+        data: {
+          full_name: fullname,
+          avatar_url: publicUrl,
+        },
+      });
+
+      if (error) throw error;
+
+      return { success: true, data };
+    } catch (err) {
+      console.error("Error updating profile:", err);
+      return { success: false, error: err };
+    }
+  };
+
   // Sign In Existing User
   const signInExistingUser = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -65,7 +107,14 @@ export const AuthContextProvider = ({
 
   return (
     <AuthContext.Provider
-      value={{ session, signUpNewUser, signInExistingUser, signInWithGoogle , signInWithGithub}}
+      value={{
+        session,
+        signUpNewUser,
+        signInExistingUser,
+        signInWithGoogle,
+        signInWithGithub,
+        updateUserProfile,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { BorderBeam } from "./magicui/border-beam";
 import { CircleArrowOutUpRight, MoveDown } from "lucide-react";
 import { SpinningText } from "./magicui/spinning-text";
+import { Link } from "react-router";
 
 const Hero = () => {
   return (
@@ -18,16 +19,18 @@ const Hero = () => {
 
       {/* CTA Button */}
       <div className="w-fit mt-6 mx-auto">
-        <Button className="!px-6 !py-4 md:!px-8 md:!py-6 relative cursor-pointer uppercase font-light overflow-hidden flex items-center gap-2">
-          <BorderBeam
-            duration={8}
-            colorFrom="#171717"
-            colorTo="#373737"
-            size={60}
-          />
-          Get Started
-          <CircleArrowOutUpRight size={20} />
-        </Button>
+        <Link to="/auth/signup">
+          <Button className="!px-6 !py-4 md:!px-8 md:!py-6 relative cursor-pointer uppercase font-light overflow-hidden flex items-center gap-2">
+            <BorderBeam
+              duration={8}
+              colorFrom="#171717"
+              colorTo="#373737"
+              size={60}
+            />
+            Get Started
+            <CircleArrowOutUpRight size={20} />
+          </Button>
+        </Link>
       </div>
 
       {/* Spinning Text */}

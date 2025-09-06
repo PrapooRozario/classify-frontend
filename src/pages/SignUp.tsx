@@ -1,82 +1,79 @@
 import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { ArrowUpLeft } from "lucide-react";
+import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+
 import Bg from "../components/ui/bg";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
 import { BorderBeam } from "../components/magicui/border-beam";
 import Text from "../components/ui/text";
 import Classify from "/classify.svg";
-import { useForm } from "react-hook-form";
 import { UserAuth } from "../context/AuthContext";
-import toast from "react-hot-toast";
-import { ArrowUpLeft } from "lucide-react";
 
-// Form input types
-type SignInFormInputs = {
+type SignUpFormInputs = {
+  fullname: string;
   email: string;
   password: string;
+  picture: FileList;
 };
 
-const SignIn = () => {
-  // Get auth functions & session from context
-  const { signInExistingUser, signInWithGoogle, session, signInWithGithub } =
-    UserAuth();
-  console.log(session);
+const SignUp = () => {
+  const {
+    signUpNewUser,
+    signInWithGoogle,
+    signInWithGithub,
+    updateUserProfile,
+  } = UserAuth();
 
-  // React Hook Form setup
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormInputs>();
+  } = useForm<SignUpFormInputs>();
 
-  // Handle sign in with email & password
-  const handleSignIn = async (data: SignInFormInputs) => {
+  const handleSignUp = async (data: SignUpFormInputs) => {
     try {
-      const res = await signInExistingUser(data.email, data.password);
-      console.log("Signed in user:", res);
+      const res = await signUpNewUser(data.email, data.password);
+      console.log("User signed up:", res);
+      toast.success("Account created successfully!");
+      const update = await updateUserProfile(data.fullname, data.picture[0]);
+
+      console.log(update);
     } catch (err) {
-      console.error("Sign-in failed:", err);
-      toast.error("Failed to sign in. Please check your credentials.");
+      console.error(err);
+      toast.error("Failed to create account!");
     }
   };
 
-  // Handle Google OAuth login
   const handleGoogleSignIn = async () => {
     try {
-      const res = await signInWithGoogle();
-      console.log(res);
-      if (session) {
-        toast.success("Signed in with Google!");
-      }
-    } catch (err) {
-      console.log(err);
+      await signInWithGoogle();
+      toast.success("Signed in with Google!");
+    } catch {
       toast.error("Google sign-in failed!");
     }
   };
 
-  // Handle GitHub OAuth login
   const handleGithubSignIn = async () => {
     try {
-      const res = await signInWithGithub();
-      console.log(res);
-      if (session) {
-        toast.success("Signed in with Github!");
-      }
-    } catch (err) {
-      console.log(err);
+      await signInWithGithub();
+      toast.success("Signed in with GitHub!");
+    } catch {
       toast.error("GitHub sign-in failed!");
     }
   };
 
   return (
-    <Bg variant="1" className="max-w-md mx-auto my-10">
+    <Bg variant="1" className="max-w-md mx-auto my-10 relative">
+      {/* Back button */}
       <Button
-        onClick={() => window.history.back(-1)}
+        onClick={() => window.history.back()}
         type="button"
-        className="absolute"
+        className="absolute top-4 left-4"
       >
         <BorderBeam
           duration={8}
@@ -86,25 +83,41 @@ const SignIn = () => {
         />
         <ArrowUpLeft size={20} />
       </Button>
+
       {/* Header / Logo */}
       <div className="flex flex-col items-center text-center mb-10">
         <Link to="/">
           <img src={Classify} alt="Logo of Classify" />
         </Link>
         <Text variant="h3" className="text-center font-normal mt-4">
-          Welcome Back
+          Create Your Account
         </Text>
         <Text variant="small" className="mt-2">
-          Please enter your details to sign in.
+          Please fill in the details below to get started.
         </Text>
       </div>
 
-      {/* Sign in form */}
-      <form onSubmit={handleSubmit(handleSignIn)}>
+      {/* Sign up form */}
+      <form onSubmit={handleSubmit(handleSignUp)}>
         <div className="flex flex-col gap-6">
-          {/* Email input */}
+          {/* Fullname */}
           <div className="grid gap-1.5">
-            <Label htmlFor="email">E-Mail Address</Label>
+            <Label htmlFor="fullname">Full Name</Label>
+            <Input
+              {...register("fullname", { required: "Full name is required" })}
+              id="fullname"
+              type="text"
+              placeholder="Prapoo Rozario"
+              className="!placeholder-neutral-400"
+            />
+            {errors.fullname && (
+              <Text variant="error">{errors.fullname.message}</Text>
+            )}
+          </div>
+
+          {/* Email */}
+          <div className="grid gap-1.5">
+            <Label htmlFor="email">Email Address</Label>
             <Input
               {...register("email", {
                 required: "Email is required",
@@ -123,22 +136,43 @@ const SignIn = () => {
             )}
           </div>
 
-          {/* Password input */}
+          {/* Password */}
           <div className="grid gap-1.5">
             <Label htmlFor="password">Password</Label>
             <Input
-              {...register("password", { required: "Password is required" })}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
               id="password"
               type="password"
-              className="!placeholder-neutral-400"
               placeholder="P@ssw0rd123"
+              className="!placeholder-neutral-400"
             />
             {errors.password && (
               <Text variant="error">{errors.password.message}</Text>
             )}
           </div>
 
-          {/* Sign In + OAuth buttons */}
+          {/* Picture */}
+          <div className="grid gap-1.5">
+            <Label htmlFor="picture">Picture</Label>
+            <Input
+              {...register("picture", {
+                required: "Profile picture is required",
+              })}
+              id="picture"
+              type="file"
+            />
+            {errors.picture && (
+              <Text variant="error">{errors.picture.message}</Text>
+            )}
+          </div>
+
+          {/* Submit & OAuth Buttons */}
           <div className="flex flex-col gap-3">
             <Button
               type="submit"
@@ -150,7 +184,7 @@ const SignIn = () => {
                 colorTo="#373737"
                 size={60}
               />
-              Sign In
+              Sign Up
             </Button>
 
             <div className="grid grid-cols-2 gap-4">
@@ -185,11 +219,11 @@ const SignIn = () => {
           </div>
         </div>
 
-        {/* Redirect to sign up */}
+        {/* Redirect to Sign In */}
         <div className="mt-4 text-center text-sm text-neutral-300">
-          Don&apos;t have an account?{" "}
-          <Link to="/auth/signup" className="font-medium  text-white">
-            Sign Up
+          Already have an account?{" "}
+          <Link to="/auth/signin" className="font-medium text-white">
+            Sign In
           </Link>
         </div>
       </form>
@@ -197,4 +231,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
