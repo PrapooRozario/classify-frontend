@@ -66,10 +66,7 @@ export const AuthContextProvider = ({
   const signUpNewUser = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) toast.error(error.message || "Sign-up failed");
-    else
-      toast.success(
-        "Sign-up successful!"
-      );
+    else toast.success("Sign-up successful!");
     return { data, error };
   };
 

@@ -50,6 +50,22 @@ const router = createBrowserRouter([
         path: "/dashboard/schedule",
         element: <DashboardHome />,
       },
+      {
+        path: "/dashboard/budget",
+        element: <DashboardHome />,
+      },
+      {
+        path: "/dashboard/planner",
+        element: <DashboardHome />,
+      },
+      {
+        path: "/dashboard/exam",
+        element: <DashboardHome />,
+      },
+      {
+        path: "/dashboard/leaderboard",
+        element: <DashboardHome />,
+      },
     ],
   },
 ]);

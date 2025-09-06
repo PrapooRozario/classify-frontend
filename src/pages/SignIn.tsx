@@ -59,7 +59,7 @@ const SignIn = () => {
   return (
     <Bg variant="1" className="max-w-md mx-auto my-10">
       <Button
-        onClick={() => window.history.back()}
+        onClick={() => (window.location.href = "/")}
         type="button"
         className="absolute"
       >
@@ -196,7 +196,6 @@ const SignIn = () => {
             to="/auth/signup"
             className="font-medium  text-white"
           >
-
             Sign Up
           </Link>
         </div>

@@ -15,14 +15,14 @@ import { Home, Calendar, CreditCard, BookOpen, Zap, type LucideIcon, User, Chart
 const routesData: RouteType[] = [
   { route: "/dashboard", name: "Go to Home", icon: Home },
   { route: "/dashboard/schedule", name: "Add Schedule", icon: Calendar },
-  { route: "/budget", name: "Add Budget", icon: CreditCard },
-  { route: "/planner", name: "Add a Planner", icon: BookOpen },
-  { route: "/exam", name: "Take an Exam", icon: Zap },
+  { route: "/dashboard/budget", name: "Add Budget", icon: CreditCard },
+  { route: "/dashboard/planner", name: "Add a Planner", icon: BookOpen },
+  { route: "/dashboard/exam", name: "Take an Exam", icon: Zap },
 ];
 
 const routesData2: RouteType2[] = 
-[{ route: "/profile", name: "Go to Profile", icon: User }, 
-{ route: "/leaderboard", name: "Go to Leaderboard", icon: ChartNoAxesColumn }
+[{ route: "/dashboard/profile", name: "Go to Profile", icon: User }, 
+{ route: "/dashboard/leaderboard", name: "Go to Leaderboard", icon: ChartNoAxesColumn }
 ];
 export {routesData, routesData2};
 
