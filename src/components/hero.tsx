@@ -4,8 +4,10 @@ import { BorderBeam } from "./magicui/border-beam";
 import { CircleArrowOutUpRight, MoveDown } from "lucide-react";
 import { SpinningText } from "./magicui/spinning-text";
 import { Link } from "react-router";
+import { UserAuth } from "../context/AuthContext";
 
 const Hero = () => {
+  const { session } = UserAuth();
   return (
     <div className="text-center px-4 md:px-0">
       {/* Heading */}
@@ -19,7 +21,7 @@ const Hero = () => {
 
       {/* CTA Button */}
       <div className="w-fit mt-6 mx-auto">
-        <Link to="/auth/signup">
+        <Link to={session ? "/dashboard" : "/auth/signup"}>
           <Button className="!px-6 !py-4 md:!px-8 md:!py-6 relative cursor-pointer uppercase font-light overflow-hidden flex items-center gap-2">
             <BorderBeam
               duration={8}
@@ -27,7 +29,7 @@ const Hero = () => {
               colorTo="#373737"
               size={60}
             />
-            Get Started
+            {session ? "Open Dashboard" : "Get Started"}
             <CircleArrowOutUpRight size={20} />
           </Button>
         </Link>

@@ -4,14 +4,15 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { BorderBeam } from "../components/magicui/border-beam";
 import Text from "../components/ui/text";
 import Classify from "/classify.svg";
 import { useForm } from "react-hook-form";
 import { UserAuth } from "../context/AuthContext";
-import toast from "react-hot-toast";
 import { ArrowUpLeft } from "lucide-react";
+import { SkewLoader } from "react-spinners";
+import { useState } from "react";
 
 // Form input types
 type SignInFormInputs = {
@@ -21,10 +22,10 @@ type SignInFormInputs = {
 
 const SignIn = () => {
   // Get auth functions & session from context
-  const { signInExistingUser, signInWithGoogle, session, signInWithGithub } =
-    UserAuth();
-  console.log(session);
+  const { signInExistingUser, signInWithGoogle, signInWithGithub } = UserAuth();
 
+  const [signInLoading, setSignInLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
   // React Hook Form setup
   const {
     register,
@@ -34,47 +35,29 @@ const SignIn = () => {
 
   // Handle sign in with email & password
   const handleSignIn = async (data: SignInFormInputs) => {
-    try {
-      const res = await signInExistingUser(data.email, data.password);
-      console.log("Signed in user:", res);
-    } catch (err) {
-      console.error("Sign-in failed:", err);
-      toast.error("Failed to sign in. Please check your credentials.");
+    setSignInLoading(true);
+    const res = await signInExistingUser(data.email, data.password);
+    if (res?.data.user) {
+      setSignInLoading(false);
+      return navigate("/");
     }
+    setSignInLoading(false);
   };
 
   // Handle Google OAuth login
-  const handleGoogleSignIn = async () => {
-    try {
-      const res = await signInWithGoogle();
-      console.log(res);
-      if (session) {
-        toast.success("Signed in with Google!");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("Google sign-in failed!");
-    }
+  const handleGoogleSignIn = () => {
+    signInWithGoogle();
   };
 
   // Handle GitHub OAuth login
-  const handleGithubSignIn = async () => {
-    try {
-      const res = await signInWithGithub();
-      console.log(res);
-      if (session) {
-        toast.success("Signed in with Github!");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("GitHub sign-in failed!");
-    }
+  const handleGithubSignIn = () => {
+    signInWithGithub();
   };
 
   return (
     <Bg variant="1" className="max-w-md mx-auto my-10">
       <Button
-        onClick={() => window.history.back(-1)}
+        onClick={() => window.history.back()}
         type="button"
         className="absolute"
       >
@@ -104,12 +87,12 @@ const SignIn = () => {
         <div className="flex flex-col gap-6">
           {/* Email input */}
           <div className="grid gap-1.5">
-            <Label htmlFor="email">E-Mail Address</Label>
+            <Label htmlFor="email">Email Address</Label>
             <Input
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
                   message: "Invalid email format",
                 },
               })}
@@ -123,15 +106,21 @@ const SignIn = () => {
             )}
           </div>
 
-          {/* Password input */}
+          {/* Password Input*/}
           <div className="grid gap-1.5">
             <Label htmlFor="password">Password</Label>
             <Input
-              {...register("password", { required: "Password is required" })}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
               id="password"
               type="password"
-              className="!placeholder-neutral-400"
               placeholder="P@ssw0rd123"
+              className="!placeholder-neutral-400"
             />
             {errors.password && (
               <Text variant="error">{errors.password.message}</Text>
@@ -141,6 +130,7 @@ const SignIn = () => {
           {/* Sign In + OAuth buttons */}
           <div className="flex flex-col gap-3">
             <Button
+              disabled={signInLoading}
               type="submit"
               className="relative flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4"
             >
@@ -150,14 +140,19 @@ const SignIn = () => {
                 colorTo="#373737"
                 size={60}
               />
-              Sign In
+              {signInLoading ? (
+                <SkewLoader color="#ffffff" size={10} />
+              ) : (
+                "Sign In"
+              )}
             </Button>
 
             <div className="grid grid-cols-2 gap-4">
               <Button
+                disabled={signInLoading}
                 onClick={handleGoogleSignIn}
                 type="button"
-                className="relative flex items-center gap-2 px-6 py-3"
+                className="relative px-6 py-3"
               >
                 <BorderBeam
                   duration={8}
@@ -165,10 +160,13 @@ const SignIn = () => {
                   colorTo="#373737"
                   size={60}
                 />
-                <FcGoogle size={20} /> Google
+                <div className="flex items-center gap-2">
+                  <FcGoogle size={20} /> Google
+                </div>
               </Button>
 
               <Button
+                disabled={signInLoading}
                 onClick={handleGithubSignIn}
                 type="button"
                 className="relative flex items-center gap-2 px-6 py-3"
@@ -179,7 +177,10 @@ const SignIn = () => {
                   colorTo="#373737"
                   size={60}
                 />
-                <FaGithub size={20} /> GitHub
+
+                <div className="flex items-center gap-2">
+                  <FaGithub size={20} /> GitHub
+                </div>
               </Button>
             </div>
           </div>

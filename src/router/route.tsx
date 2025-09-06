@@ -25,6 +25,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/auth/signin", element: <SignIn /> },
       { path: "/auth/signup", element: <SignUp /> },
+      // { path: "/auth/verify-email", element: <VerifyEmail /> },
     ],
   },
   {
