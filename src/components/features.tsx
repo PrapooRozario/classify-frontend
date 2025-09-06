@@ -6,6 +6,7 @@ import Bg from "./ui/bg";
 import { Button } from "./ui/button";
 import Text from "./ui/text";
 import { featuresData } from "../data/featuresData";
+import { Link } from "react-router";
 
 const Features = () => {
   return (
@@ -32,16 +33,18 @@ const Features = () => {
                 {feature.description}
               </Text>
             </div>
-            <Button className="relative z-20 mt-6 cursor-pointer uppercase font-light overflow-hidden flex items-center gap-2 !px-4 !py-2">
-              <BorderBeam
-                duration={8}
-                colorFrom="#171717"
-                colorTo="#373737"
-                size={60}
-              />
-              {feature.buttonText}
-              <ArrowUpRight size={20} />
-            </Button>
+            <Link to={feature.buttonLink}>
+              <Button className="relative z-20 mt-6 cursor-pointer uppercase font-light overflow-hidden flex items-center gap-2 !px-4 !py-2">
+                <BorderBeam
+                  duration={8}
+                  colorFrom="#171717"
+                  colorTo="#373737"
+                  size={60}
+                />
+                {feature.buttonText}
+                <ArrowUpRight size={20} />
+              </Button>
+            </Link>
             <InteractiveGridPattern
               className={cn(
                 "[mask-image:radial-gradient(400px_circle_at_center,#171717,transparent)]",

@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { type Session } from "@supabase/supabase-js";
-import type { File } from "buffer";
 import toast from "react-hot-toast";
 
 // -------------------------

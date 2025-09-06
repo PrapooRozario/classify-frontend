@@ -7,6 +7,8 @@ import LandingPage from "../pages/LandingPage";
 import AuthLayout from "../layouts/AuthLayout";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import PrivateAuthRoute from "./PrivateAuthRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <AuthLayout />,
+    element: (
+      <PrivateAuthRoute>
+        <AuthLayout />
+      </PrivateAuthRoute>
+    ),
     children: [
       { path: "/auth/signin", element: <SignIn /> },
       { path: "/auth/signup", element: <SignUp /> },
@@ -30,7 +36,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",

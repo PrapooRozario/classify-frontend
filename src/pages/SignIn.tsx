@@ -4,7 +4,7 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { BorderBeam } from "../components/magicui/border-beam";
 import Text from "../components/ui/text";
 import Classify from "/classify.svg";
@@ -26,6 +26,8 @@ const SignIn = () => {
 
   const [signInLoading, setSignInLoading] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const navTo = state?.prevPathname || "/";
   // React Hook Form setup
   const {
     register,
@@ -39,7 +41,7 @@ const SignIn = () => {
     const res = await signInExistingUser(data.email, data.password);
     if (res?.data.user) {
       setSignInLoading(false);
-      return navigate("/");
+      return navigate(navTo, { replace: true });
     }
     setSignInLoading(false);
   };
@@ -189,7 +191,12 @@ const SignIn = () => {
         {/* Redirect to sign up */}
         <div className="mt-4 text-center text-sm text-neutral-300">
           Don&apos;t have an account?{" "}
-          <Link to="/auth/signup" className="font-medium  text-white">
+          <Link
+            state={{ prevPathname: state?.prevPathname }}
+            to="/auth/signup"
+            className="font-medium  text-white"
+          >
+
             Sign Up
           </Link>
         </div>

@@ -19,7 +19,7 @@ type SpinningTextProps = {
 
 const BASE_TRANSITION = {
   repeat: Infinity,
-  ease: "linear",
+  ease: (t: number) => t,
 };
 
 const BASE_ITEM_VARIANTS = {

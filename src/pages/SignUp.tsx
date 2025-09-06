@@ -1,7 +1,7 @@
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { ArrowUpLeft } from "lucide-react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 
 import Bg from "../components/ui/bg";
@@ -24,6 +24,8 @@ type SignUpFormInputs = {
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const navTo = state?.prevPathname || "/";
   const [signUpLoading, setSignUpLoading] = useState<boolean>(false);
   const {
     signUpNewUser,
@@ -45,10 +47,9 @@ const SignUp = () => {
     if (data.fullname || data.picture?.[0]) {
       await updateUserProfile(data.fullname, data.picture[0]);
       setSignUpLoading(false);
-      navigate("/");
+      return navigate(navTo, { replace: true });
     }
     setSignUpLoading(false);
-    console.log(res);
   };
 
   return (

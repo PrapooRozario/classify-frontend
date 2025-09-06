@@ -228,7 +228,7 @@ const DashboardHome = () => {
                 key={index}
                 subjectTime={classItem.classTime}
                 instructorImage={classItem.instructorImage}
-                subjectColor={subjectColors[classItem.subjectName]}
+                subjectColor={subjectColors[classItem.subjectName as keyof typeof subjectColors] ?? subjectColors.Default}
                 className="w-full flex-shrink-0"
               />
             ))}
