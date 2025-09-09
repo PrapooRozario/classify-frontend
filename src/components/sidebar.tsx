@@ -11,7 +11,7 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
-    <div className="sticky top-4 sm:top-8 lg:top-20 w-full lg:w-auto flex flex-col gap-2">
+    <div className="sticky flex flex-col gap-2">
       {/* Toggle Button */}
       <Button
         size="icon"

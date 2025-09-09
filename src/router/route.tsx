@@ -9,6 +9,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import PrivateAuthRoute from "./PrivateAuthRoute";
 import PrivateRoute from "./PrivateRoute";
+import Schedule from "../pages/Schedule";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/schedule",
-        element: <DashboardHome />,
+        element: <Schedule />,
       },
       {
         path: "/dashboard/budget",

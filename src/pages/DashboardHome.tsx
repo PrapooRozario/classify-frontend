@@ -18,6 +18,7 @@ import ActiveClassesChart from "../components/activeClassesChart";
 import ClassCard from "../components/ui/classCard";
 import { Button } from "../components/ui/button";
 import { PointChart } from "../components/pointChart";
+import { FaStarOfLife } from "react-icons/fa";
 const DashboardHome = () => {
   // Active Tasks status data
   const tasksStatus = [
@@ -56,7 +57,6 @@ const DashboardHome = () => {
     Chemistry: "bg-gradient-to-r from-neutral-800/10 to-pink-900/5 ",
     Default: "bg-gradient-to-r from-neutral-800/10 to-neutral-900/5",
   };
-
   return (
     <div>
       {/* Header Section */}
@@ -228,7 +228,11 @@ const DashboardHome = () => {
                 key={index}
                 subjectTime={classItem.classTime}
                 instructorImage={classItem.instructorImage}
-                subjectColor={subjectColors[classItem.subjectName as keyof typeof subjectColors] ?? subjectColors.Default}
+                subjectColor={
+                  subjectColors[
+                    classItem.subjectName as keyof typeof subjectColors
+                  ] ?? subjectColors.Default
+                }
                 className="w-full flex-shrink-0"
               />
             ))}
@@ -257,9 +261,11 @@ const DashboardHome = () => {
             variant="p"
             className="uppercase text-white flex flex-col md:flex-row gap-2 items-center justify-center text-xs md:text-base text-center"
           >
+            <FaStarOfLife className="text-white" />
             Is your exam knocking at the door? No worries!
             <Button className="uppercase cursor-pointer">Take Exam</Button>
-            and boost your confidence!
+            and boost your confidence
+            <FaStarOfLife className="text-white" />
           </Text>
         </Bg>
       </div>

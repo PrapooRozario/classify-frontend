@@ -2,11 +2,8 @@ import Contact from "../components/contact";
 import Features from "../components/features";
 import Hero from "../components/hero";
 import LightRays from "../components/LightRays";
-import { UserAuth } from "../context/AuthContext";
 
 const LandingPage = () => {
-  const {session} = UserAuth()
-  console.log(session)
   return (
     <div>
       <LightRays

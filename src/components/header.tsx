@@ -10,9 +10,9 @@ const Header = () => {
   const { session, signOutUser, loading } = UserAuth();
   return (
     <div className="flex justify-between items-center">
-      <div>
+      <Link to="/">
         <img src={Classify} alt="Logo of Classify" />
-      </div>
+      </Link>
       {session ? (
         <div>
           <Button
