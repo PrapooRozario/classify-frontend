@@ -1,5 +1,4 @@
 import { Area, AreaChart, XAxis } from "recharts";
-import Card from "./ui/card";
 import {
   ChartContainer,
   ChartLegend,
@@ -17,6 +16,7 @@ import {
 } from "./ui/select";
 import React from "react";
 import { WalletCards } from "lucide-react";
+import Card from "./ui/card";
 
 const chartData = [
   { date: "2024-04-01", income: 222, expense: 150 },
@@ -152,7 +152,7 @@ export function BudgetChart() {
           </SelectTrigger>
           <SelectContent className="rounded-xl bg-neutral-900 border-neutral-800 text-white">
             <SelectItem value="all_time" className="rounded-lg">
-             All Time
+              All Time
             </SelectItem>
             <SelectItem value="90d" className="rounded-lg">
               Last 3 months

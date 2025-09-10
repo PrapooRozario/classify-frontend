@@ -6,7 +6,6 @@ import {
   School,
   TrendingUp,
 } from "lucide-react";
-import Card from "../components/ui/card";
 import Text from "../components/ui/text";
 import RankProfile from "../components/ui/rankProfile";
 
@@ -19,6 +18,7 @@ import ClassCard from "../components/ui/classCard";
 import { Button } from "../components/ui/button";
 import { PointChart } from "../components/pointChart";
 import { FaStarOfLife } from "react-icons/fa";
+import Card from "../components/ui/card";
 const DashboardHome = () => {
   // Active Tasks status data
   const tasksStatus = [

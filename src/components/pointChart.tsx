@@ -1,6 +1,5 @@
 import React from "react";
 import { Bar, BarChart, XAxis } from "recharts";
-import Card from "./ui/card";
 import {
   ChartContainer,
   ChartTooltip,
@@ -15,6 +14,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Coins } from "lucide-react";
+import Card from "./ui/card";
 const chartData = [
   { date: "2024-01-15", value: 186 },
   { date: "2024-01-10", value: 305 },
@@ -50,7 +50,6 @@ export function PointChart() {
     return date >= startDate;
   });
 
-
   return (
     <Card
       HeaderText="Points Overview"
@@ -77,7 +76,7 @@ export function PointChart() {
       <ChartContainer className="aspect-auto h-[250px]" config={chartConfig}>
         <BarChart data={filteredData}>
           <XAxis
-          dataKey="date"
+            dataKey="date"
             tickLine={false}
             axisLine={false}
             tickMargin={5}
